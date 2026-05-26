@@ -1,7 +1,6 @@
 extends CharacterBody3D
 
-
-const SPEED = 5.0
+const SPEED = 20.0
 const JUMP_VELOCITY = 7
 #Variables que vamos a usar
 @export var mouse_sensitivity = 0.2
