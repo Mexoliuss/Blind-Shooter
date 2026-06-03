@@ -1,5 +1,10 @@
 extends CharacterBody3D
 
+@export var attack_distance = 2.0
+@export var attack_damage = 10
+@export var attack_cooldown = 1.0
+var can_attack = true
+
 @export var movement_speed: float = 3.0
 @export var target: Node3D
 
@@ -7,6 +12,35 @@ extends CharacterBody3D
 @onready var mesh = $Character_Monster
 
 var speed: float = 0.1
+var vidita_en = 100
+
+#Funcion de daño al enemigo
+func take_damage(amount):
+
+	vidita_en -= amount
+
+	print("Enemy HP: ", vidita_en)
+
+	if vidita_en <= 0:
+		queue_free()
+
+#Funcion para que ataque al player
+func attack_player():
+	# Si todavía está en cooldown
+	if not can_attack:
+		return
+	
+	# Bloqueamos ataque
+	can_attack = false
+
+	# HACER DAÑO AL PLAYER
+	target.take_damage(attack_damage)
+	print("ENEMY ATTACK")
+	# Esperar cooldown
+	await get_tree().create_timer(attack_cooldown).timeout
+
+	# Puede volver a atacar
+	can_attack = true
 
 func rotate_to_player():
 	var direccion = (target.global_position - global_transform.origin).normalized()
@@ -15,14 +49,6 @@ func rotate_to_player():
 		var angulo = atan2(direccion.x, direccion.z)
 		mesh.rotation.y = angulo
 	
-
-
-func look_follow(delta: float, target_position: Vector3) -> void:
-	var direccion = (target_position - global_transform.origin).normalized()
-	
-	var mirar = Basis.looking_at(direccion, Vector3.UP).orthonormalized()
-	
-	global_transform.basis = global_transform.basis.slerp(mirar, speed*delta)
 
 
 func _ready():
@@ -50,6 +76,21 @@ func _physics_process(delta):
 	var direction = global_position.direction_to(next_position)
 	
 	velocity = direction * movement_speed
+	
+	
+	# Distancia al jugador
+	var distance_to_player = global_position.distance_to(target.global_position)
+
+	# SI ESTÁ CERCA → ATACAR
+	if distance_to_player <= attack_distance:
+
+		velocity = Vector3.ZERO
+
+		attack_player()
+
+		move_and_slide()
+
+		return
 	#var direccion = Vector3(target.global_position) - Vector3(position)
 	#var norm_dir = direccion.normalized()
 	

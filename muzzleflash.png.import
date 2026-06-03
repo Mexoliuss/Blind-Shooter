@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cb2cn2fva8jkb"
-path.s3tc="res://.godot/imported/quadrocket_quadrocket_color.png-85f199df01c7a3e990fbe8d596342141.s3tc.ctex"
+uid="uid://btunkd0l0aqgv"
+path.s3tc="res://.godot/imported/muzzleflash.png-4d365c6870e8472d5991431f3741355d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Normal version Color and NormalMap/GLB/quadrocket_quadrocket_color.png"
-dest_files=["res://.godot/imported/quadrocket_quadrocket_color.png-85f199df01c7a3e990fbe8d596342141.s3tc.ctex"]
+source_file="res://muzzleflash.png"
+dest_files=["res://.godot/imported/muzzleflash.png-4d365c6870e8472d5991431f3741355d.s3tc.ctex"]
 
 [params]
 
