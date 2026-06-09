@@ -42,7 +42,57 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.58456886, -0.07789993, -1.083812)]
+"values": [Vector3(0.585, -0.7, -1.084)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.4901161e-08, 1.5707965, 0.38397244)]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-0.7, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_lgr22"]
+resource_name = "recarga"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.31765822, 1.7333333, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.5707964, 0.34906584), Vector3(0, 1.5707964, 1.3962634), Vector3(0, 1.5707964, 1.3962634), Vector3(0, 1.5707964, 1.3962634), Vector3(0, 1.5707964, 0.34906584)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 2),
+"points": PackedFloat32Array(-0.7, 0, 0, 0.33333334, 0, -1, -0.16918552, 0, 0.16414782, 0, -0.7, 0, 0, 0.33333334, 0, -1, -0.16918552, 0, 0.16414782, 0, -0.7, 0, 0, 0.33333334, 0, -1, -0.16918552, 0, 0.16414782, 0, -0.7, -0.33333334, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.3, 0.6, 1, 1.3666667, 1.7333333, 2)
 }
 
 [sub_resource type="Animation" id="Animation_trn2v"]
@@ -58,12 +108,13 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.25, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0.58456886, -0.07789993, -1.083812), Vector3(0.585, -0.078, -0.084), Vector3(0.585, -0.078, -1.084)]
+"values": [Vector3(0.585, -0.7, -1.084), Vector3(0.585, -0.7, -0.084), Vector3(0.585, -0.7, -1.084)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_03owx"]
 _data = {
 &"RESET": SubResource("Animation_03owx"),
+&"recarga": SubResource("Animation_lgr22"),
 &"shoot": SubResource("Animation_trn2v")
 }
 
@@ -121,7 +172,7 @@ transform = Transform3D(-4.9998097, 0, 0.04363287, 0, 5, 1.1920929e-07, -0.04363
 transform = Transform3D(1, 0, 0, 0, 0.9583226, 0.28568837, 0, -0.28568837, 0.9583226, -0.6533513, 4.3915577, 0.66589224)
 
 [node name="Arma" parent="Personaje/Camera3D" unique_id=1538516223 instance=ExtResource("2_r0du0")]
-transform = Transform3D(-3.091991e-07, 0, 6.9999995, 1.9998183, 6.708258, 8.866606e-08, -6.7082577, 1.9998183, -2.9232632e-07, 0.58456886, -0.07789993, -1.083812)
+transform = Transform3D(-1.0183276e-06, 5.2393096e-07, 6.9999995, 2.6222458, 6.490287, -1.0430812e-07, -6.490287, 2.622246, -1.1404447e-06, 0.585, -0.7, -1.084)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Personaje/Camera3D/Arma" unique_id=842113920]
 stream = ExtResource("4_trn2v")
@@ -189,6 +240,16 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.007843138, 0.73333335, 0, 0.6117647)
 
+[node name="Ammo" type="TextEdit" parent="Personaje/CanvasLayer/InterfaceBase" unique_id=1645711862]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.007
+anchor_bottom = 0.012
+offset_left = 1091.0
+offset_top = 610.0
+offset_right = 1142.936
+offset_bottom = 639.224
+
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=938971720]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4436522, 0)
 navigation_mesh = SubResource("NavigationMesh_3dxm6")
@@ -243,5 +304,5 @@ transform = Transform3D(10, 0, 0, 0, 100, 0, 0, 0, 400, -210, 24.388, 0)
 shape = SubResource("BoxShape3D_trn2v")
 
 [node name="Bicho" parent="." unique_id=2124439529 node_paths=PackedStringArray("target") instance=ExtResource("7_trn2v")]
-transform = Transform3D(-2, 0, -1.7484555e-07, 0, 2, 0, 1.7484555e-07, 0, -2, 0, 0.6677246, -24.416138)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.6677246, -24.416138)
 target = NodePath("../Personaje")
