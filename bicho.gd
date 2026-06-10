@@ -1,22 +1,28 @@
 extends CharacterBody3D
 
-@export var attack_distance = 2.0
-@export var attack_damage = 10
+@export var attack_distance = 2
+@export var attack_damage = 30
 @export var attack_cooldown = 1.0
-var can_attack = true
 
 @export var movement_speed: float = 3.0
 @export var target: Node3D
 
+#esto es para el saltito
+@export var jump_speed = 30
+@export var jump_duration = 0.3
+var jumping = false
+var jump_direction = Vector3.ZERO
+
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var mesh = $Character_Monster
 
-var speed: float = 0.1
 var vidita_en = 100
+var can_attack = true
 
-#Funcion de daño al enemigo
+#al salto lo hice como una maquinita de estados, jeje
+var preparing_attack = false
+
 func take_damage(amount):
-
 	vidita_en -= amount
 
 	print("Enemy HP: ", vidita_en)
@@ -24,81 +30,92 @@ func take_damage(amount):
 	if vidita_en <= 0:
 		queue_free()
 
-#Funcion para que ataque al player
 func attack_player():
-	# Si todavía está en cooldown
 	if not can_attack:
 		return
-	
-	# Bloqueamos ataque
+
 	can_attack = false
 
-	# HACER DAÑO AL PLAYER
 	target.take_damage(attack_damage)
 	print("ENEMY ATTACK")
-	# Esperar cooldown
+
 	await get_tree().create_timer(attack_cooldown).timeout
 
-	# Puede volver a atacar
 	can_attack = true
 
-func rotate_to_player():
-	var direccion = (target.global_position - global_transform.origin).normalized()
+func prepare_attack():
+	#si ya esta esperando o saltando, espera.
+	if preparing_attack or jumping:
+		return
 	
-	if direccion.length() > 0.1:
-		var angulo = atan2(direccion.x, direccion.z)
-		mesh.rotation.y = angulo
+	preparing_attack = true
+	#esperamos 0.5
+	await get_tree().create_timer(0.5).timeout
+	#direccion hacia el player
+	jump_direction = global_position.direction_to(target.global_position)
+	#para la maquinita de estados.
+	jumping = true
+	preparing_attack = false
+	#esperamos lo que dura el salto
+	await get_tree().create_timer(jump_duration).timeout
+	#salto en falso
+	jumping = false
 	
+	if global_position.distance_to(target.global_position) <= attack_distance:
+		attack_player()
 
+func rotate_to_direction(dir: Vector3, delta):
+	if dir.length() > 0.1:
+		var target_angle = atan2(dir.x, dir.z)
+
+		mesh.rotation.y = lerp_angle(
+			mesh.rotation.y,
+			target_angle,
+			5.0 * delta
+		)
 
 func _ready():
 	navigation_agent.path_desired_distance = 0.5
 	navigation_agent.target_desired_distance = 0.01
 
-
 func _physics_process(delta):
 	if target == null:
 		return
 
-	# Actualiza el destino al player
+	if preparing_attack:
+		velocity = Vector3.ZERO
+		move_and_slide()
+		return
+
+	if jumping:
+		velocity = jump_direction * jump_speed
+		rotate_to_direction(jump_direction, delta)
+		move_and_slide()
+		return
+
 	navigation_agent.target_position = target.global_position
 
-	# Si ya llegó, no se mueve
 	if navigation_agent.is_navigation_finished():
 		velocity = Vector3.ZERO
 		move_and_slide()
 		return
 
-	# Siguiente punto del path
 	var next_position = navigation_agent.get_next_path_position()
-
-	# Dirección hacia ese punto
 	var direction = global_position.direction_to(next_position)
-	
+
 	velocity = direction * movement_speed
-	
-	
-	# Distancia al jugador
+
 	var distance_to_player = global_position.distance_to(target.global_position)
 
-	# SI ESTÁ CERCA → ATACAR
-	if distance_to_player <= attack_distance:
+	print(distance_to_player)
 
-		velocity = Vector3.ZERO
-
-		attack_player()
-
-		move_and_slide()
-
+	if distance_to_player > 30:
+		velocity *= 2
+	elif distance_to_player > 20 and distance_to_player < 30:
+		velocity *= 0.5
+	elif distance_to_player <= 10:
+		prepare_attack()
 		return
-	#var direccion = Vector3(target.global_position) - Vector3(position)
-	#var norm_dir = direccion.normalized()
-	
-	#var angulo = acos(norm_dir.dot(Vector3(0, 0, 1)))
-	#print(norm_dir)
-	#rotation.y = -angulo
-	#look_follow(delta, target.global_position)
-	rotate_to_player()
-	
-	
+
+	rotate_to_direction(direction, delta)
 	move_and_slide()
