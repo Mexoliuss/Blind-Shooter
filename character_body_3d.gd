@@ -148,7 +148,7 @@ func shoot():
 
 func take_damage(amount):
 	vidita_ju -= amount
-	print("Enemy HP: ", vidita_ju)
+	print("Player HP: ", vidita_ju)
 	if vidita_ju <= 0:
 		die()
 
