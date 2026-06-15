@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://co3qd02aqtlc4"]
+
+[ext_resource type="Script" uid="uid://dspqaafq6wssb" path="res://pickupitem.gd" id="1_wf8pd"]
+[ext_resource type="AudioStream" uid="uid://dn1pl1jnx16g7" path="res://Assets/stingers/balas.mp3" id="3_l0xwl"]
+[ext_resource type="PackedScene" uid="uid://dwljlmg8q0kdk" path="res://caja_municion.tscn" id="3_wf8pd"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d6lv6"]
+radius = 4.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wf8pd"]
+radius = 20.0
+
+[node name="Pickupitem" type="Area3D" unique_id=2043235444]
+script = ExtResource("1_wf8pd")
+item_type = "ammo"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=224206715]
+shape = SubResource("SphereShape3D_d6lv6")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=551851738]
+visible = false
+light_energy = 16.0
+light_volumetric_fog_energy = 5.0
+omni_range = 20.0
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=265303155]
+stream = ExtResource("3_l0xwl")
+volume_db = 5.0
+max_db = 6.0
+max_distance = 20.0
+
+[node name="ammo_box" parent="." unique_id=747553727 instance=ExtResource("3_wf8pd")]
+
+[node name="DetectionArea" type="Area3D" parent="." unique_id=538198161]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea" unique_id=1807383418]
+shape = SubResource("SphereShape3D_wf8pd")

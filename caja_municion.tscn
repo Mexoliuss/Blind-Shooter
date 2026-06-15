@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dwljlmg8q0kdk"]
+
+[ext_resource type="PackedScene" uid="uid://esc0yd8f66gb" path="res://Assets/ammo_box/ammo_box.glb" id="1_mucua"]
+
+[node name="ammo_box" unique_id=747553727 instance=ExtResource("1_mucua")]

@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://pwsvpyoap0wi"]
+
+[ext_resource type="Script" uid="uid://dspqaafq6wssb" path="res://pickupitem.gd" id="1_50h40"]
+[ext_resource type="AudioStream" uid="uid://dmobqio3c4nqa" path="res://Assets/stingers/bateria.mp3" id="3_5a0gg"]
+[ext_resource type="PackedScene" uid="uid://din28r5ii13s0" path="res://bateria_item.tscn" id="3_50h40"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5a0gg"]
+radius = 4.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_50h40"]
+radius = 20.0
+
+[node name="Pickupitem" type="Area3D" unique_id=2043235444]
+script = ExtResource("1_50h40")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=224206715]
+shape = SubResource("SphereShape3D_5a0gg")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=551851738]
+visible = false
+light_energy = 16.0
+light_volumetric_fog_energy = 5.0
+omni_range = 20.0
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=265303155]
+stream = ExtResource("3_5a0gg")
+volume_db = 5.0
+max_db = 6.0
+max_distance = 20.0
+
+[node name="Sketchfab_Scene" parent="." unique_id=1581015116 instance=ExtResource("3_50h40")]
+
+[node name="DetectionArea" type="Area3D" parent="." unique_id=1352931786]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea" unique_id=1893653608]
+shape = SubResource("SphereShape3D_50h40")
