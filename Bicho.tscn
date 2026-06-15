@@ -26,3 +26,8 @@ max_distance = 25.0
 
 [node name="Character_Monster" parent="." unique_id=1547506928 instance=ExtResource("3_ao0d4")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="AttackCooldown" type="Timer" parent="." unique_id=1296562360]
+one_shot = true
+
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_timer_timeout"]

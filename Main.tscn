@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://c781slc2d4kqy"]
 
+[ext_resource type="Script" uid="uid://bqh3052b1wj2p" path="res://main.gd" id="1_03owx"]
 [ext_resource type="Script" uid="uid://687j327vpr0k" path="res://character_body_3d.gd" id="1_glv2v"]
 [ext_resource type="PackedScene" uid="uid://dqytqxperq1uh" path="res://Assets/Normal version Color and NormalMap/GLB/pew.glb" id="2_r0du0"]
 [ext_resource type="PackedScene" uid="uid://dsfo6dmk81i3b" path="res://Assets/Unreal-Godot/UAL1_Standard.glb" id="3_r0du0"]
@@ -238,6 +239,7 @@ albedo_texture = ExtResource("6_trn2v")
 [sub_resource type="BoxShape3D" id="BoxShape3D_trn2v"]
 
 [node name="Main" type="Node3D" unique_id=1318008059]
+script = ExtResource("1_03owx")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=536607004]
 transform = Transform3D(0.99062663, 0.13659741, 5.551115e-17, 0.0046742517, -0.03389844, 0.9994144, 0.1365174, -0.9900465, -0.034219187, 2.6302443, 32.546486, 0)
@@ -738,3 +740,5 @@ shape = SubResource("BoxShape3D_trn2v")
 [node name="Bicho" parent="." unique_id=2124439529 node_paths=PackedStringArray("target") instance=ExtResource("7_trn2v")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 40.221874, 0.6677246, -59.420334)
 target = NodePath("../Personaje")
+
+[connection signal="died" from="Personaje" to="." method="_on_personaje_died"]

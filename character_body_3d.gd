@@ -35,7 +35,7 @@ const ammo_mag = 10
 @export var recharge_speed = 2
 
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	ammo_hud.text=str(ammo_current) + "/" + str(ammo_mag)
 
 func _process(delta):
@@ -93,10 +93,10 @@ func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_ESCAPE:
 			mouse_captured = !mouse_captured
-		if mouse_captured:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		#if mouse_captured:
+			#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		#else:
+			#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -152,5 +152,8 @@ func take_damage(amount): #aca toma daño
 	if vidita_ju <= 0:
 		die()
 
+signal died
+
 func die():
 	print("PLAYER DEAD") #esto es si se muere
+	emit_signal("died")

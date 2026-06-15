@@ -30,18 +30,20 @@ func take_damage(amount):
 	if vidita_en <= 0:
 		queue_free()
 
+@onready var attack_timer: Timer = $AttackCooldown
+
 func attack_player():
 	if not can_attack:
 		return
 
 	can_attack = false
-
 	target.take_damage(attack_damage)
 	print("ENEMY ATTACK")
+	
+	if is_inside_tree():
+		attack_timer.start()
+	
 
-	await get_tree().create_timer(attack_cooldown).timeout
-
-	can_attack = true
 
 func prepare_attack():
 	#si ya esta esperando o saltando, espera.
@@ -107,7 +109,7 @@ func _physics_process(delta):
 
 	var distance_to_player = global_position.distance_to(target.global_position)
 
-	print(distance_to_player)
+	#print(distance_to_player)
 
 	if distance_to_player > 30:
 		velocity *= 2
@@ -119,3 +121,7 @@ func _physics_process(delta):
 
 	rotate_to_direction(direction, delta)
 	move_and_slide()
+
+
+func _on_timer_timeout() -> void:
+	can_attack = true

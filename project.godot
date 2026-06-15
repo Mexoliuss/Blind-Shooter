@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Blind Shooter"
-run/main_scene="uid://c781slc2d4kqy"
+run/main_scene="uid://dn2drxuao8q0w"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*uid://df2pfeus1rk56"
 
 [filesystem]
 
