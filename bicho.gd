@@ -4,7 +4,7 @@ extends CharacterBody3D
 @export var attack_damage = 30
 @export var attack_cooldown = 1.0
 
-@export var movement_speed: float = 3.0
+@export var movement_speed: float = 5.0
 @export var target: Node3D
 
 #esto es para el saltito
@@ -12,15 +12,20 @@ extends CharacterBody3D
 @export var jump_duration = 0.3
 var jumping = false
 var jump_direction = Vector3.ZERO
+var preparing_attack = false #al salto lo hice como una maquinita de estados, jeje
+var is_dead = false
+
 
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var mesh = $Character_Monster
-
+@onready var anim_player: AnimationPlayer = $Character_Monster/AnimationPlayer  # <-- NUEVO
 var vidita_en = 100
 var can_attack = true
 
-#al salto lo hice como una maquinita de estados, jeje
-var preparing_attack = false
+
+func play_animation(anim_name: String):  # funcion para el cambio de animacion
+	if anim_player.current_animation != anim_name:
+		anim_player.play(anim_name)
 
 func take_damage(amount):
 	vidita_en -= amount
@@ -28,7 +33,16 @@ func take_damage(amount):
 	print("Enemy HP: ", vidita_en)
 
 	if vidita_en <= 0:
-		queue_free()
+		die()  # <-- cambiado
+
+func die():  # funcion de muerte
+	if is_dead:
+		return
+	is_dead = true
+	play_animation("death/mixamo_com")
+	# Esperamos que termine la animación antes de eliminar
+	await get_tree().create_timer(anim_player.get_animation("death/mixamo_com").length).timeout
+	queue_free()
 
 @onready var attack_timer: Timer = $AttackCooldown
 
@@ -51,6 +65,7 @@ func prepare_attack():
 		return
 	
 	preparing_attack = true
+	play_animation("idle/mixamo_com")  # <-- espera en idle antes de saltar
 	#esperamos 0.5
 	await get_tree().create_timer(0.5).timeout
 	#direccion hacia el player
@@ -79,17 +94,21 @@ func rotate_to_direction(dir: Vector3, delta):
 func _ready():
 	navigation_agent.path_desired_distance = 0.5
 	navigation_agent.target_desired_distance = 0.01
+	play_animation("idle/mixamo_com")  # <-- empieza en idle
 
 func _physics_process(delta):
-	if target == null:
-		return
+	if is_dead or target == null:
+		return  # <-- chequeamos is_dead
+
 
 	if preparing_attack:
+		play_animation("idle/mixamo_com")  # <-- quieto mientras prepara
 		velocity = Vector3.ZERO
 		move_and_slide()
 		return
 
 	if jumping:
+		play_animation("jump/mixamo_com")  # <-- animación de salto
 		velocity = jump_direction * jump_speed
 		rotate_to_direction(jump_direction, delta)
 		move_and_slide()
@@ -98,6 +117,7 @@ func _physics_process(delta):
 	navigation_agent.target_position = target.global_position
 
 	if navigation_agent.is_navigation_finished():
+		play_animation("idle/mixamo_com")  # <-- idle cuando llega
 		velocity = Vector3.ZERO
 		move_and_slide()
 		return
@@ -118,7 +138,7 @@ func _physics_process(delta):
 	elif distance_to_player <= 10:
 		prepare_attack()
 		return
-
+	play_animation("run/mixamo_com")  # <-- corre hacia el player
 	rotate_to_direction(direction, delta)
 	move_and_slide()
 
