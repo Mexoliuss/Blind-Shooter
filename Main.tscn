@@ -29,7 +29,7 @@ glow_enabled = true
 fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0.2687177, 0.29437795, 0.3343036, 1)
-fog_density = 1.0
+fog_density = 0.3
 fog_depth_begin = 2.0
 fog_depth_end = 15.0
 
@@ -262,9 +262,10 @@ emission_energy_multiplier = 3.0
 script = ExtResource("1_03owx")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=536607004]
-transform = Transform3D(0.99062663, 0.13659741, 5.551115e-17, 0.0046742517, -0.03389844, 0.9994144, 0.1365174, -0.9900465, -0.034219187, 2.6302443, 32.546486, 0)
+transform = Transform3D(0.99062663, 0.13659741, 5.551115e-17, 0.0046742517, -0.03389844, 0.9994144, 0.1365174, -0.9900465, -0.034219187, 2.6302443, 46.397392, 0)
 light_energy = 100.0
 spot_range = 94.12988
+spot_attenuation = 2.0
 spot_angle = 53.703094
 
 [node name="Entorno" type="WorldEnvironment" parent="." unique_id=840779136 groups=["entorno"]]

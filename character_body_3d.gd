@@ -172,7 +172,7 @@ func desactivar_visor():
 		efecto_visor.visible = false
 
 	if world_env and world_env.environment:
-		world_env.environment.fog_density = 1.0
+		world_env.environment.fog_density = 0.3
 
 
 func manage_battery(delta):
