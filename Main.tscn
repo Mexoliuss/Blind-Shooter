@@ -24,12 +24,12 @@ sky_material = SubResource("ProceduralSkyMaterial_rxg2q")
 background_mode = 1
 sky = SubResource("Sky_glv2v")
 tonemap_mode = 2
+glow_enabled = true
 fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0.2687177, 0.29437795, 0.3343036, 1)
 fog_density = 1.0
-fog_depth_begin = 2.0
-fog_depth_end = 15.0
+fog_depth_end = 30.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uu6xs"]
 radius = 0.6352539
@@ -247,14 +247,39 @@ albedo_texture = ExtResource("6_trn2v")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_trn2v"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_5vvyt"]
+size = Vector3(4.369629, 1, 1)
+
 [node name="Main" type="Node3D" unique_id=1318008059]
 script = ExtResource("1_03owx")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=536607004]
-transform = Transform3D(0.99062663, 0.13659741, 5.551115e-17, 0.0046742517, -0.03389844, 0.9994144, 0.1365174, -0.9900465, -0.034219187, 2.6302443, 32.546486, 0)
-light_energy = 100.0
-spot_range = 94.12988
-spot_angle = 53.703094
+transform = Transform3D(0.99062663, 0.13659741, 5.551115e-17, 0.0046742517, -0.03389844, 0.9994144, 0.1365174, -0.9900465, -0.034219187, -157.05707, 120.63378, 85.36287)
+light_energy = 10.0
+spot_range = 4096.0
+spot_attenuation = 0.5
+spot_angle = 55.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="." unique_id=240407454]
+transform = Transform3D(0.99062663, 0.13659741, 5.551115e-17, 0.0046742517, -0.03389844, 0.9994144, 0.1365174, -0.9900465, -0.034219187, -147.67206, 120.63378, -43.69755)
+light_energy = 10.0
+spot_range = 4096.0
+spot_attenuation = 0.5
+spot_angle = 55.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=657041805]
+transform = Transform3D(0.99062663, 0.13659741, 5.551115e-17, 0.0046742517, -0.03389844, 0.9994144, 0.1365174, -0.9900465, -0.034219187, 173.79369, 120.63378, -95.00279)
+light_energy = 10.0
+spot_range = 4096.0
+spot_attenuation = 0.5
+spot_angle = 55.0
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="." unique_id=196509291]
+transform = Transform3D(0.99062663, 0.13659741, 5.551115e-17, 0.0046742517, -0.03389844, 0.9994144, 0.1365174, -0.9900465, -0.034219187, 173.79369, 120.63378, 63.001312)
+light_energy = 10.0
+spot_range = 4096.0
+spot_attenuation = 0.5
+spot_angle = 55.0
 
 [node name="Entorno" type="WorldEnvironment" parent="." unique_id=840779136 groups=["entorno"]]
 environment = SubResource("Environment_uu6xs")
@@ -762,12 +787,16 @@ transform = Transform3D(500, 0, 0, 0, 100, 0, 0, 0, 10, 0, 32.332, 165)
 shape = SubResource("BoxShape3D_lgr22")
 
 [node name="Pared_Norte" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D" unique_id=95629110]
-transform = Transform3D(10, 0, 0, 0, 100, 0, 0, 0, 400, 240, 24.388, 0)
+transform = Transform3D(10, 0, 0, 0, 100, 0, 0, 0, 400, 248.1694, 24.388, 0)
 shape = SubResource("BoxShape3D_trn2v")
 
 [node name="Pared_Sur" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D" unique_id=1759622232]
-transform = Transform3D(10, 0, 0, 0, 100, 0, 0, 0, 400, -210, 24.388, 0)
+transform = Transform3D(10, 0, 0, 0, 100, 0, 0, 0, 400, -219.22458, 24.388, 0)
 shape = SubResource("BoxShape3D_trn2v")
+
+[node name="Porton" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D" unique_id=642197133]
+transform = Transform3D(4, 0, 0, 0, 100, 0, 0, 0, 195, -215.34001, 50.409657, 14.393851)
+shape = SubResource("BoxShape3D_5vvyt")
 
 [node name="Bicho" parent="." unique_id=2124439529 node_paths=PackedStringArray("target") instance=ExtResource("7_trn2v")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 40.221874, 0.6677246, -59.420334)
