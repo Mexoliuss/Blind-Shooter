@@ -33,3 +33,6 @@ func game_over(gano: bool):
 
 func _on_personaje_died() -> void:
 	game_over(false)
+	
+func _on_meta_reached_goal():
+	game_over(true)
