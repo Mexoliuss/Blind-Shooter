@@ -5,15 +5,15 @@
 [ext_resource type="AudioStream" uid="uid://cfm1wb1ppd8y1" path="res://Assets/drones/Wendigo Sounds.mp3" id="3_mfjh6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fos0i"]
-radius = 0.43896484
-height = 5.274658
+radius = 0.8876953
+height = 5.019348
 
 [node name="Bicho" type="CharacterBody3D" unique_id=2124439529]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("1_u3e2r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1317993498]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.43907785, 2.4553146, -0.41550255)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.62952447, 2.4469666, 0.0978013)
 shape = SubResource("CapsuleShape3D_fos0i")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1379473775]

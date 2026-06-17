@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://bsbh4u21n1vtg" path="res://pickup_spawner.gd" id="10_5vvyt"]
 [ext_resource type="PackedScene" uid="uid://pwsvpyoap0wi" path="res://BatteryPickup.tscn" id="11_c6i3y"]
 [ext_resource type="PackedScene" uid="uid://co3qd02aqtlc4" path="res://AmmoPickup.tscn" id="12_c2ibq"]
+[ext_resource type="Script" uid="uid://ji5pvahsacs8" path="res://llegada.gd" id="13_c6i3y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rxg2q"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -24,6 +25,7 @@ sky_material = SubResource("ProceduralSkyMaterial_rxg2q")
 background_mode = 1
 sky = SubResource("Sky_glv2v")
 tonemap_mode = 2
+glow_enabled = true
 fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0.2687177, 0.29437795, 0.3343036, 1)
@@ -247,6 +249,15 @@ albedo_texture = ExtResource("6_trn2v")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_trn2v"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_5vvyt"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5tfui"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_38apo"]
+emission_enabled = true
+emission = Color(0.8051458, 0.88475823, 0.02054644, 1)
+emission_energy_multiplier = 3.0
+
 [node name="Main" type="Node3D" unique_id=1318008059]
 script = ExtResource("1_03owx")
 
@@ -345,13 +356,15 @@ color = Color(0.007843138, 0.73333335, 0, 0.6117647)
 
 [node name="Ammo" type="TextEdit" parent="Personaje/CanvasLayer/InterfaceBase" unique_id=1645711862]
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.007
-anchor_bottom = 0.012
-offset_left = 1091.0
-offset_top = 610.0
-offset_right = 1142.936
-offset_bottom = 639.224
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -51.936035
+offset_top = -29.223999
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="BarraVida" type="ProgressBar" parent="Personaje/CanvasLayer/InterfaceBase" unique_id=583932852]
 custom_minimum_size = Vector2(250, 24)
@@ -795,3 +808,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.821, 4, -23.13)
 
 [node name="Marker3D5" type="Marker3D" parent="PickupSpawnPoints" unique_id=1440218147]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.153, 4, 53.418)
+
+[node name="Llegada" type="Area3D" parent="." unique_id=1397068333]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -196.83493, 3.5938587, -114.62348)
+collision_layer = 2
+script = ExtResource("13_c6i3y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Llegada" unique_id=195291113]
+shape = SubResource("BoxShape3D_5vvyt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Llegada" unique_id=113642266]
+mesh = SubResource("BoxMesh_5tfui")
+surface_material_override/0 = SubResource("StandardMaterial3D_38apo")
+
+[connection signal="reached_goal" from="Llegada" to="." method="_on_meta_reached_goal"]
