@@ -1,11 +1,11 @@
 extends CharacterBody3D
 
 @onready var camera = $Camera3D
-@onready var gunshot = $Camera3D/Arma/AudioStreamPlayer3D
+@onready var audio_arma = $Camera3D/Arma/AudioStreamPlayer3D
 @onready var anim = $Camera3D/Arma/AnimationPlayer
 @onready var muzzle_flash = $Camera3D/Arma/MuzzleFlash
 @onready var visor = $Camera3D/SpotLight3D
-
+@onready var audio_player= $AudioStreamPlayer3D
 @export var max_health: float = 100.0
 var vidita_ju: float = 100.0
 
@@ -62,7 +62,7 @@ var mouse_captured = true
 
 @export var arm_damage = 20
 @export var ammo_current = 10
-const ammo_mag = 10
+const ammo_mag = 6
 
 @export var recharge_speed = 2.0
 
@@ -76,6 +76,9 @@ var is_reloading: bool = false
 
 var nearby_pickups: Array[Node3D] = []
 
+var sonido_caminar
+var sonido_disparo
+var sonido_recarga
 
 func _ready():
 	vidita_ju = max_health
@@ -83,9 +86,17 @@ func _ready():
 
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-	ammo_current = clamp(ammo_current, 0, ammo_mag)
+	#ammo_current = clamp(ammo_current, 0, ammo_mag)
 
 	update_hud()
+	
+	# sonidos 
+	sonido_caminar = load_mp3("res://Assets/Sonidos/Caminar.mp3")
+	audio_player.set_stream(sonido_caminar)
+	sonido_disparo = load_mp3("res://gunshot.mp3")
+	sonido_recarga=load_mp3("res://Assets/Sonidos/Recarga_arma.mp3")
+	audio_arma.set_stream(sonido_disparo)
+
 
 
 func _process(delta):
@@ -119,6 +130,7 @@ func _input(event):
 		if event.keycode == KEY_ESCAPE:
 			mouse_captured = !mouse_captured
 
+
 		if mouse_captured:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		else:
@@ -134,8 +146,12 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-
+			
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	if (input_dir!=Vector2.ZERO) and (!audio_player.is_playing()):
+		audio_player.play(20.0)
+	elif (input_dir==Vector2.ZERO): 
+		audio_player.stop()
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 	if direction:
@@ -218,7 +234,7 @@ func shoot():
 	ammo_current -= 1
 	update_hud()
 
-	gunshot.play()
+	audio_arma.play()
 	anim.play("shoot")
 
 	muzzle_flash.visible = true
@@ -231,7 +247,8 @@ func shoot():
 	var end = origin + -camera.global_transform.basis.z * 100
 	var query = PhysicsRayQueryParameters3D.create(origin, end)
 	var result = space_state.intersect_ray(query)
-
+	audio_arma.set_stream(sonido_disparo)
+	audio_arma.play()
 	if result:
 		print("DISPARO IMPACTÓ")
 		if result.collider.has_method("take_damage"):
@@ -241,7 +258,8 @@ func shoot():
 func reload_weapon():
 	if is_reloading:
 		return
-
+	audio_arma.set_stream(sonido_recarga)
+	audio_arma.play(1.0)
 	if ammo_current >= ammo_mag:
 		print("El arma ya tiene el cargador lleno.")
 		return
@@ -254,7 +272,7 @@ func reload_weapon():
 
 	anim.play("recarga")
 	await get_tree().create_timer(recharge_speed).timeout
-
+	
 	magazines_inventory -= 1
 	ammo_current = ammo_mag
 	is_reloading = false
@@ -413,3 +431,10 @@ func manage_health_regeneration(delta):
 		vidita_ju = clamp(vidita_ju, 0.0, max_health)
 
 		update_health_hud()
+
+func load_mp3(path):
+	var file = FileAccess.open(path, FileAccess.READ)
+	var sound = AudioStreamMP3.new()
+	sound.data = file.get_buffer(file.get_length())
+	return sound
+	
