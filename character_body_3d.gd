@@ -68,8 +68,8 @@ const ammo_mag = 6
 
 var magazines_inventory: int = 0
 var is_reloading: bool = false
-
-
+var arma_timer = 0.3
+const timer_limit = 0.3
 # -------------------------
 # PICKUPS CERCANOS
 # -------------------------
@@ -160,7 +160,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-
+	
+	
+	arma_timer+=0.01
 	move_and_slide()
 
 
@@ -226,7 +228,8 @@ func recharge_visor():
 func shoot():
 	if is_reloading:
 		return
-
+	if arma_timer < timer_limit:
+		return
 	if ammo_current <= 0:
 		print("Sin balas. Presioná R para recargar si tenés cargadores.")
 		return
@@ -241,7 +244,7 @@ func shoot():
 	await get_tree().create_timer(0.05).timeout
 	muzzle_flash.visible = false
 	muzzle_flash.rotation.z = randf_range(-0.2, 0.2)
-
+	arma_timer=0
 	var space_state = get_world_3d().direct_space_state
 	var origin = camera.global_transform.origin
 	var end = origin + -camera.global_transform.basis.z * 100

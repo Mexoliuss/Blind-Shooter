@@ -30,8 +30,8 @@ glow_enabled = true
 fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0.2687177, 0.29437795, 0.3343036, 1)
-fog_density = 0.3
-fog_depth_begin = 2.0
+fog_density = 1.0
+fog_depth_begin = 6.0
 fog_depth_end = 15.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uu6xs"]
@@ -265,11 +265,32 @@ emission_energy_multiplier = 3.0
 script = ExtResource("1_03owx")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=536607004]
-transform = Transform3D(0.99062663, 0.13659741, 5.551115e-17, 0.0046742517, -0.03389844, 0.9994144, 0.1365174, -0.9900465, -0.034219187, 2.6302443, 46.397392, 0)
-light_energy = 100.0
-spot_range = 94.12988
-spot_attenuation = 2.0
-spot_angle = 53.703094
+transform = Transform3D(0.99062663, 0.13659741, 5.551115e-17, 0.0046742517, -0.03389844, 0.9994144, 0.1365174, -0.9900465, -0.034219187, 166.28706, 114.2448, 106.89376)
+light_energy = 15.0
+spot_range = 4096.0
+spot_attenuation = 0.5
+spot_angle = 60.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="." unique_id=1279576308]
+transform = Transform3D(0.99062663, 0.13659741, 5.551115e-17, 0.0046742517, -0.03389844, 0.9994144, 0.1365174, -0.9900465, -0.034219187, -97.61701, 118.00952, 44.97593)
+light_energy = 15.0
+spot_range = 4096.0
+spot_attenuation = 0.5
+spot_angle = 60.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="." unique_id=678329820]
+transform = Transform3D(0.99062663, 0.13659741, 5.551115e-17, 0.0046742517, -0.03389844, 0.9994144, 0.1365174, -0.9900465, -0.034219187, -106.17177, 99.517456, -62.17559)
+light_energy = 15.0
+spot_range = 4096.0
+spot_attenuation = 0.5
+spot_angle = 60.0
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="." unique_id=513967378]
+transform = Transform3D(0.99062663, 0.13659741, 5.551115e-17, 0.0046742517, -0.03389844, 0.9994144, 0.1365174, -0.9900465, -0.034219187, 173.29889, 103.126595, -60.20266)
+light_energy = 15.0
+spot_range = 4096.0
+spot_attenuation = 0.5
+spot_angle = 60.0
 
 [node name="Entorno" type="WorldEnvironment" parent="." unique_id=840779136 groups=["entorno"]]
 environment = SubResource("Environment_uu6xs")
