@@ -1,5 +1,6 @@
 extends Area3D
 
+var sonar = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -8,10 +9,15 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if sonar:
+		$AudioStreamPlayer3D.play()
 
 signal reached_goal
 
 func _on_body_entered(body):
 	if body.name == "Personaje":
 		emit_signal("reached_goal")
+
+
+func _on_timer_timeout() -> void:
+	sonar = !sonar
