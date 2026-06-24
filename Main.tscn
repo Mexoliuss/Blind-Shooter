@@ -348,11 +348,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="BarraBateria" type="ProgressBar" parent="Personaje/CanvasLayer/InterfaceBase" unique_id=869691539]
-custom_minimum_size = Vector2(180, 16)
+custom_minimum_size = Vector2(600, 60)
 layout_mode = 1
-offset_left = 20.0
-offset_right = 270.0
-offset_bottom = 23.0
+offset_right = 600.0
+offset_bottom = 60.0
 mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_lgr22")
 theme_override_styles/fill = SubResource("StyleBoxFlat_trn2v")
@@ -369,17 +368,22 @@ mouse_filter = 2
 color = Color(0.007843138, 0.73333335, 0, 0.6117647)
 
 [node name="Ammo" type="TextEdit" parent="Personaje/CanvasLayer/InterfaceBase" unique_id=1645711862]
+custom_minimum_size = Vector2(400, 400)
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.007
-anchor_bottom = 0.012
-offset_left = 1091.0
-offset_top = 610.0
-offset_right = 1142.936
-offset_bottom = 639.224
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -560.0
+offset_top = -50.0
+offset_right = -160.0
+offset_bottom = 350.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="BarraVida" type="ProgressBar" parent="Personaje/CanvasLayer/InterfaceBase" unique_id=583932852]
-custom_minimum_size = Vector2(250, 24)
+custom_minimum_size = Vector2(349, 50)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
