@@ -36,10 +36,12 @@ var batteries_inventory: int = 0
 
 @onready var barra_bateria = get_node_or_null("CanvasLayer/InterfaceBase/BarraBateria")
 @onready var efecto_visor = get_node_or_null("CanvasLayer/InterfaceBase/EfectoVisor")
-@onready var ammo_hud = get_node_or_null("CanvasLayer/InterfaceBase/Ammo")
+@onready var ammo_hud = get_node_or_null("CanvasLayer/InterfaceBase/Ammo/Label")
 @onready var battery_hud = get_node_or_null("CanvasLayer/InterfaceBase/Baterias")
 @onready var barra_vida = get_node_or_null("CanvasLayer/InterfaceBase/BarraVida")
 @onready var efecto_danio = get_node_or_null("CanvasLayer/EfectoDanio")
+@onready var cant_balas = get_node_or_null("CanvasLayer/InterfaceBase/HBoxContainer/Cant_balas")
+@onready var cant_bat = get_node_or_null("CanvasLayer/InterfaceBase/HBoxContainer/Cant_baterias")
 
 @onready var world_env := get_tree().get_first_node_in_group("entorno") as WorldEnvironment
 
@@ -61,7 +63,7 @@ var mouse_captured = true
 # -------------------------
 
 @export var arm_damage = 20
-@export var ammo_current = 10
+@export var ammo_current = 6
 const ammo_mag = 6
 
 @export var recharge_speed = 2.0
@@ -139,7 +141,7 @@ func _input(event):
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity += get_gravity()*1.5 * delta
 
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
@@ -346,14 +348,21 @@ func add_pickup(item_type: String, amount: int):
 
 func update_hud():
 	if ammo_hud != null:
-		ammo_hud.text = str(ammo_current) + "/" + str(ammo_mag) + " | Carg: " + str(magazines_inventory)
+		ammo_hud.text = "Cargador: " + str(ammo_current) + "/" + str(ammo_mag)
 
 	if battery_hud != null:
 		battery_hud.text = "Bat: " + str(batteries_inventory)
 
 	if barra_bateria != null:
 		barra_bateria.value = current_battery
-
+		
+	if cant_balas != null:
+		cant_balas.text = str(magazines_inventory)
+		print(magazines_inventory)
+		
+	if cant_bat != null:
+		cant_bat.text = str(batteries_inventory)
+		print(batteries_inventory)
 
 # -------------------------
 # DAÑO / MUERTE
@@ -383,7 +392,6 @@ func die():
 	
 	muelto.emit()
 	is_dead = true
-	print("PLAYER DEAD")
 
 
 func update_health_hud():

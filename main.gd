@@ -5,6 +5,7 @@ var mouse_suelto = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	Global.start_timer()
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Al presionar Esc, el mouse se vuelve a liberar y mostrar
@@ -21,6 +22,8 @@ func _process(delta: float) -> void:
 	pass
 	
 func game_over(gano: bool):
+	
+	Global.stop_timer()
 	get_tree().paused = false
 
 	# Guardamos el resultado en una variable global simple

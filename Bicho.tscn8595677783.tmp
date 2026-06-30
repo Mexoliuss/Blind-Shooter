@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dlljd5rrw80fb"]
+
+[ext_resource type="Script" uid="uid://cti6u2t6o6fac" path="res://bicho.gd" id="1_u3e2r"]
+[ext_resource type="PackedScene" uid="uid://cy8u4whw4txal" path="res://character_monster.tscn" id="3_ao0d4"]
+[ext_resource type="AudioStream" uid="uid://cfm1wb1ppd8y1" path="res://Assets/drones/Wendigo Sounds.mp3" id="3_mfjh6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fos0i"]
+radius = 0.43896484
+height = 5.274658
+
+[node name="Bicho" type="CharacterBody3D" unique_id=2124439529]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+script = ExtResource("1_u3e2r")
+attack_distance = null
+attack_damage = null
+attack_cooldown = null
+movement_speed = null
+jump_speed = null
+jump_duration = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1317993498]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04520178, 2.4553146, 0.0018353462)
+shape = SubResource("CapsuleShape3D_fos0i")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1379473775]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.77903605, 4.1490383, -0.5529685)
+stream = ExtResource("3_mfjh6")
+volume_db = 80.0
+autoplay = true
+max_distance = 440.84
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1653296033]
+
+[node name="Character_Monster" parent="." unique_id=1547506928 instance=ExtResource("3_ao0d4")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="AttackCooldown" type="Timer" parent="." unique_id=1296562360]
+one_shot = true
+
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_timer_timeout"]

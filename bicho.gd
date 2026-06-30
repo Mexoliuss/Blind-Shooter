@@ -4,11 +4,11 @@ extends CharacterBody3D
 @export var attack_damage = 30
 @export var attack_cooldown = 1.0
 
-@export var movement_speed: float = 5.0
+@export var movement_speed: float = 15.0
 @export var target: Node3D
 
 #esto es para el saltito
-@export var jump_speed = 30
+@export var jump_speed = 40
 @export var jump_duration = 0.3
 var jumping = false
 var jump_direction = Vector3.ZERO
@@ -18,10 +18,19 @@ var is_dead = false
 
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var mesh = $Character_Monster
+@onready var audio_player: AudioStreamPlayer3D = $AudioStreamPlayer3D
 @onready var anim_player: AnimationPlayer = $Character_Monster/AnimationPlayer  # <-- NUEVO
 var vidita_en = 100
 var can_attack = true
 
+#sonidos 
+var sonido_lejos
+var sonido_cerca
+var sonido_ataque
+var timing_sonidos
+var rng = RandomNumberGenerator.new()
+var timing_audios
+var timing_actual
 
 func play_animation(anim_name: String):  # funcion para el cambio de animacion
 	if anim_player.current_animation != anim_name:
@@ -39,6 +48,7 @@ func die():  # funcion de muerte
 	if is_dead:
 		return
 	is_dead = true
+	Global.register_kill()
 	play_animation("death/mixamo_com")
 	# Esperamos que termine la animación antes de eliminar
 	await get_tree().create_timer(anim_player.get_animation("death/mixamo_com").length).timeout
@@ -49,7 +59,7 @@ func die():  # funcion de muerte
 func attack_player():
 	if not can_attack:
 		return
-
+	
 	can_attack = false
 	target.take_damage(attack_damage)
 	print("ENEMY ATTACK")
@@ -95,6 +105,13 @@ func _ready():
 	navigation_agent.path_desired_distance = 0.5
 	navigation_agent.target_desired_distance = 0.01
 	play_animation("idle/mixamo_com")  # <-- empieza en idle
+	
+	# sonidos 
+	sonido_lejos = load_mp3("res://Assets/Monsters/SciFi_Monster2.mp3")
+	sonido_cerca = load_mp3("res://Assets/Monsters/Monster_Roar22.mp3")
+	sonido_ataque = load_mp3("res://Assets/Monsters/Monster_Grunt1.mp3")
+	timing_audios = rng.randf_range(4, 8)
+	timing_actual = 0
 
 func _physics_process(delta):
 	if is_dead or target == null:
@@ -104,6 +121,9 @@ func _physics_process(delta):
 	if preparing_attack:
 		play_animation("idle/mixamo_com")  # <-- quieto mientras prepara
 		velocity = Vector3.ZERO
+		if audio_player.stream != sonido_ataque:
+			audio_player.set_stream(sonido_ataque)
+			audio_player.play()
 		move_and_slide()
 		return
 
@@ -131,13 +151,29 @@ func _physics_process(delta):
 
 	#print(distance_to_player)
 
-	if distance_to_player > 30:
+	if distance_to_player > 60:
 		velocity *= 2
-	elif distance_to_player > 20 and distance_to_player < 30:
+		if audio_player.stream != sonido_lejos:
+			audio_player.set_stream(sonido_lejos)
+	
+		
+	elif distance_to_player > 30 and distance_to_player < 60:
 		velocity *= 0.5
+		if audio_player.stream != sonido_cerca:
+			audio_player.set_stream(sonido_cerca)
+		
 	elif distance_to_player <= 10:
 		prepare_attack()
+		print("me esta comiendo")
 		return
+		
+	if timing_actual>timing_audios:
+		audio_player.play()
+		print("audio !")
+		timing_actual=0
+	timing_actual+=0.01
+	
+	
 	play_animation("run/mixamo_com")  # <-- corre hacia el player
 	rotate_to_direction(direction, delta)
 	move_and_slide()
@@ -145,3 +181,10 @@ func _physics_process(delta):
 
 func _on_timer_timeout() -> void:
 	can_attack = true
+
+	
+func load_mp3(path):
+	var file = FileAccess.open(path, FileAccess.READ)
+	var sound = AudioStreamMP3.new()
+	sound.data = file.get_buffer(file.get_length())
+	return sound

@@ -1,11 +1,10 @@
 extends Control
 
-@onready var label_resultado = $CenterContainer/VBoxContainer/Label
+@onready var label_resultado = $CenterContainer/PanelContainer/VBoxContainer/TextoFin
+@onready var label_time = $CenterContainer/PanelContainer/VBoxContainer/Time
+@onready var label_kills = $CenterContainer/PanelContainer/VBoxContainer/Kills
 
 func _ready():
-	#process_mode = Node.PROCESS_MODE_WHEN_PAUSED
-	#$CenterContainer/VBoxContainer/RePLAY.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
-	#$CenterContainer/VBoxContainer/MenuBack.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
@@ -13,6 +12,9 @@ func _ready():
 		label_resultado.text = "¡GANASTE!"
 	else:
 		label_resultado.text = "PERDISTE :( (Manco)"
+		
+	label_time.text = "Tiempo de Juego: " + Global.get_formatted_time()
+	label_kills.text = "Enemigos matados: " + str(Global.kills)
 
 func _on_volver_jugar_pressed():
 	print("entra")

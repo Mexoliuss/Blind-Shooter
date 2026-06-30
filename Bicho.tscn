@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://dlljd5rrw80fb"]
 
 [ext_resource type="Script" uid="uid://cti6u2t6o6fac" path="res://bicho.gd" id="1_u3e2r"]
+[ext_resource type="AudioStream" uid="uid://76drsnrdr44q" path="res://Assets/Monsters/SciFi_Monster1.mp3" id="2_u3e2r"]
 [ext_resource type="PackedScene" uid="uid://cy8u4whw4txal" path="res://character_monster.tscn" id="3_ao0d4"]
-[ext_resource type="AudioStream" uid="uid://cfm1wb1ppd8y1" path="res://Assets/drones/Wendigo Sounds.mp3" id="3_mfjh6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fos0i"]
 radius = 0.43896484
@@ -18,9 +18,10 @@ shape = SubResource("CapsuleShape3D_fos0i")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1379473775]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.77903605, 4.1490383, -0.5529685)
-stream = ExtResource("3_mfjh6")
-autoplay = true
-max_distance = 25.0
+stream = ExtResource("2_u3e2r")
+volume_db = 15.0
+unit_size = 30.0
+max_distance = 500.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1653296033]
 

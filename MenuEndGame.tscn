@@ -10,6 +10,16 @@ shader_parameter/density = 1.0
 shader_parameter/smoke_color = Color(0.6, 0.6, 0.6, 1)
 shader_parameter/bg_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bvjhn"]
+content_margin_left = 40.0
+content_margin_top = 40.0
+content_margin_right = 40.0
+content_margin_bottom = 40.0
+bg_color = Color(0, 0, 0, 0.28235295)
+border_width_left = 2
+border_width_right = 2
+border_color = Color(0, 0, 0, 1)
+
 [node name="Control" type="Control" unique_id=946116966]
 process_mode = 3
 layout_mode = 3
@@ -37,26 +47,40 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=904013061]
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=666577818]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bvjhn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=904013061]
 layout_mode = 2
 theme_override_constants/separation = 12
 alignment = 1
 
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer" unique_id=43932520]
+[node name="TextoFin" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=43932520]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 
-[node name="RePLAY" type="Button" parent="CenterContainer/VBoxContainer" unique_id=2124072948]
+[node name="Time" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=495794853]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+
+[node name="Kills" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1549847560]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+
+[node name="RePLAY" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=2124072948]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "VOLVER A JUGAR
 "
 
-[node name="MenuBack" type="Button" parent="CenterContainer/VBoxContainer" unique_id=517596333]
+[node name="MenuBack" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=517596333]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "VOLVER AL MENÚ"
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/RePLAY" to="." method="_on_volver_jugar_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/MenuBack" to="." method="_on_volver_menu_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/RePLAY" to="." method="_on_volver_jugar_pressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/MenuBack" to="." method="_on_volver_menu_pressed"]
