@@ -858,5 +858,6 @@ volume_db = 80.0
 wait_time = 5.0
 autostart = true
 
+[connection signal="muelto" from="Personaje" to="." method="_on_personaje_died"]
 [connection signal="reached_goal" from="Llegada" to="." method="_on_meta_reached_goal"]
 [connection signal="timeout" from="Llegada/Timer" to="Llegada" method="_on_timer_timeout"]

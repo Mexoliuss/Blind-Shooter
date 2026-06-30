@@ -377,10 +377,11 @@ func take_damage(amount):
 		die()
 
 
-func die():
-	if is_dead:
-		return
+signal muelto
 
+func die():
+	
+	muelto.emit()
 	is_dead = true
 	print("PLAYER DEAD")
 
