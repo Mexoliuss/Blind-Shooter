@@ -1,6 +1,14 @@
 [gd_scene format=3 uid="uid://dn2drxuao8q0w"]
 
 [ext_resource type="Script" uid="uid://cqhjlejdia56k" path="res://control.gd" id="1_i26rj"]
+[ext_resource type="Shader" uid="uid://q8rqe2hevste" path="res://MainMenu.gdshader" id="2_eiy7p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h7a2f"]
+shader = ExtResource("2_eiy7p")
+shader_parameter/speed = 0.15
+shader_parameter/density = 1.0
+shader_parameter/smoke_color = Color(0.6, 0.6, 0.6, 1)
+shader_parameter/bg_color = Color(0, 0, 0, 1)
 
 [node name="Control" type="Control" unique_id=1743904520]
 layout_mode = 3
@@ -11,6 +19,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_i26rj")
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1204370581]
+material = SubResource("ShaderMaterial_h7a2f")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=580434969]
 layout_mode = 1
 anchors_preset = 8
@@ -18,14 +35,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -29.0
-offset_top = -33.0
-offset_right = 29.0
-offset_bottom = 33.0
+offset_left = -63.5
+offset_top = -77.0
+offset_right = 63.5
+offset_bottom = 77.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(3, 3)
-use_top_left = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=25340618]
 layout_mode = 2
@@ -33,6 +48,7 @@ alignment = 1
 
 [node name="Nombre" type="Label" parent="CenterContainer/VBoxContainer" unique_id=965054687]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "BLIND SHOOTER
 "
 horizontal_alignment = 1
@@ -40,13 +56,21 @@ vertical_alignment = 1
 
 [node name="JUGAR" type="Button" parent="CenterContainer/VBoxContainer" unique_id=719415666]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "JUGAR
 "
 
+[node name="CONTROLES" type="Button" parent="CenterContainer/VBoxContainer" unique_id=599037442]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "CONTROLES"
+
 [node name="SALIR" type="Button" parent="CenterContainer/VBoxContainer" unique_id=687376180]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "SALIR
 "
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/JUGAR" to="." method="_on_jugar_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/CONTROLES" to="." method="_on_controles_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/SALIR" to="." method="_on_salir_pressed"]

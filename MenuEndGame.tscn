@@ -1,6 +1,14 @@
 [gd_scene format=3 uid="uid://bjf1b7tdalk8u"]
 
 [ext_resource type="Script" uid="uid://duhpgbydc3wt0" path="res://menu_end_game.gd" id="1_cn858"]
+[ext_resource type="Shader" uid="uid://q8rqe2hevste" path="res://MainMenu.gdshader" id="2_bvjhn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sngy7"]
+shader = ExtResource("2_bvjhn")
+shader_parameter/speed = 0.15
+shader_parameter/density = 1.0
+shader_parameter/smoke_color = Color(0.6, 0.6, 0.6, 1)
+shader_parameter/bg_color = Color(0, 0, 0, 1)
 
 [node name="Control" type="Control" unique_id=946116966]
 process_mode = 3
@@ -12,37 +20,42 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cn858")
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1490856702]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=571682313]
+material = SubResource("ShaderMaterial_sngy7")
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -72.5
-offset_top = -46.5
-offset_right = 72.5
-offset_bottom = 46.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(3, 3)
-use_top_left = true
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1490856702]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=904013061]
 layout_mode = 2
+theme_override_constants/separation = 12
 alignment = 1
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer" unique_id=43932520]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 
 [node name="RePLAY" type="Button" parent="CenterContainer/VBoxContainer" unique_id=2124072948]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "VOLVER A JUGAR
 "
 
 [node name="MenuBack" type="Button" parent="CenterContainer/VBoxContainer" unique_id=517596333]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "VOLVER AL MENÚ"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/RePLAY" to="." method="_on_volver_jugar_pressed"]

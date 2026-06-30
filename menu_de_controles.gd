@@ -10,12 +10,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func _on_jugar_pressed():
-	get_tree().change_scene_to_file("res://Main.tscn")
-
-func _on_salir_pressed():
-	get_tree().quit()
 
 
-func _on_controles_pressed() -> void:
-	get_tree().change_scene_to_file("res://Menu_de_controles.tscn")
+func _on_volver_pressed() -> void:
+	get_tree().change_scene_to_file("res://MainMenu.tscn")

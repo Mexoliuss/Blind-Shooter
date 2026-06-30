@@ -1,0 +1,159 @@
+[gd_scene format=3 uid="uid://dud8alr11s3sx"]
+
+[ext_resource type="Script" uid="uid://ba6haxyhm5fn6" path="res://menu_de_controles.gd" id="1_c2sjt"]
+[ext_resource type="Shader" uid="uid://q8rqe2hevste" path="res://MainMenu.gdshader" id="1_w6mti"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c2sjt"]
+shader = ExtResource("1_w6mti")
+shader_parameter/speed = 0.15
+shader_parameter/density = 1.0
+shader_parameter/smoke_color = Color(0.6, 0.6, 0.6, 1)
+shader_parameter/bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_os0ag"]
+bg_color = Color(0, 0, 0, 0.28627452)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="Control" type="Control" unique_id=78904033]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c2sjt")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1173281231]
+material = SubResource("ShaderMaterial_c2sjt")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1811350048]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=1436385652]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_os0ag")
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer" unique_id=1884879753]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer" unique_id=1530782682]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=1937459679]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "CONTROLES"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer" unique_id=690799471]
+layout_mode = 2
+theme_override_constants/h_separation = 50
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="WASD" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=1988680997]
+layout_mode = 2
+text = "W-A-S-D"
+horizontal_alignment = 1
+
+[node name="Mover" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=2047062213]
+layout_mode = 2
+text = "Moverse"
+horizontal_alignment = 1
+
+[node name="Espacio" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=2115424668]
+layout_mode = 2
+text = "Espacio"
+horizontal_alignment = 1
+
+[node name="Saltar" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=1924806733]
+layout_mode = 2
+text = "Saltar"
+horizontal_alignment = 1
+
+[node name="Click" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=110430487]
+layout_mode = 2
+text = "Click Izquierdo"
+horizontal_alignment = 1
+
+[node name="Disparar" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=1142102310]
+layout_mode = 2
+text = "Disparar"
+horizontal_alignment = 1
+
+[node name="E" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=1187155949]
+layout_mode = 2
+text = "E"
+horizontal_alignment = 1
+
+[node name="Agarrar" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=1942219810]
+layout_mode = 2
+text = "Agarrar objetos del suelo"
+horizontal_alignment = 1
+
+[node name="F" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=545904914]
+layout_mode = 2
+text = "F"
+horizontal_alignment = 1
+
+[node name="Visor" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=2135754920]
+layout_mode = 2
+text = "Activar visor"
+horizontal_alignment = 1
+
+[node name="R" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=1504177252]
+layout_mode = 2
+text = "R"
+horizontal_alignment = 1
+
+[node name="Rec Arma" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=2018750360]
+layout_mode = 2
+text = "Recargar arma"
+horizontal_alignment = 1
+
+[node name="T" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=1207573104]
+layout_mode = 2
+text = "T"
+horizontal_alignment = 1
+
+[node name="Rec Visor" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/GridContainer" unique_id=248141220]
+layout_mode = 2
+text = "Recargar visor"
+horizontal_alignment = 1
+
+[node name="VOLVER" type="Button" parent="." unique_id=2014098329]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -47.0
+offset_top = -31.0
+offset_right = 47.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Volver"
+
+[connection signal="pressed" from="VOLVER" to="." method="_on_volver_pressed"]
