@@ -11,7 +11,7 @@ func _ready():
 	if Global.gano:
 		label_resultado.text = "¡GANASTE!"
 	else:
-		label_resultado.text = "PERDISTE :( (Manco)"
+		label_resultado.text = "PERDISTE"
 		
 	label_time.text = "Tiempo de Juego: " + Global.get_formatted_time()
 	label_kills.text = "Enemigos matados: " + str(Global.kills)
