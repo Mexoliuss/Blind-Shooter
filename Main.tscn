@@ -1,7 +1,11 @@
 [gd_scene format=3 uid="uid://hd03p0waq6gc"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_03owx"]
+<<<<<<< Updated upstream
 [ext_resource type="Script" path="res://character_body_3d.gd" id="1_glv2v"]
+=======
+[ext_resource type="Script" uid="uid://687j327vpr0k" path="res://character_body_3d.gd" id="1_glv2v"]
+>>>>>>> Stashed changes
 [ext_resource type="PackedScene" uid="uid://dqytqxperq1uh" path="res://Assets/Normal version Color and NormalMap/GLB/pew.glb" id="2_r0du0"]
 [ext_resource type="PackedScene" uid="uid://dsfo6dmk81i3b" path="res://Assets/Unreal-Godot/UAL1_Standard.glb" id="3_r0du0"]
 [ext_resource type="Texture2D" uid="uid://btunkd0l0aqgv" path="res://muzzleflash.png" id="5_03owx"]
@@ -11,8 +15,13 @@
 [ext_resource type="PackedScene" path="res://Bicho.tscn" id="7_trn2v"]
 [ext_resource type="Texture2D" uid="uid://dcr35fayvfdn6" path="res://Assets/battery.png" id="8_fpfj3"]
 [ext_resource type="Script" path="res://pickup_spawner.gd" id="10_5vvyt"]
+<<<<<<< Updated upstream
 [ext_resource type="PackedScene" path="res://BatteryPickup.tscn" id="11_c6i3y"]
 [ext_resource type="PackedScene" path="res://AmmoPickup.tscn" id="12_c2ibq"]
+=======
+[ext_resource type="PackedScene" uid="uid://pwsvpyoap0wi" path="res://BatteryPickup.tscn" id="11_c6i3y"]
+[ext_resource type="PackedScene" uid="uid://co3qd02aqtlc4" path="res://AmmoPickup.tscn" id="12_c2ibq"]
+>>>>>>> Stashed changes
 [ext_resource type="Script" path="res://llegada.gd" id="13_c6i3y"]
 [ext_resource type="AudioStream" uid="uid://dikgn7iwoosgw" path="res://Assets/Sonidos/Campana-mono.mp3" id="14_c2ibq"]
 
