@@ -1,20 +1,19 @@
-[gd_scene format=3 uid="uid://c781slc2d4kqy"]
+[gd_scene format=3 uid="uid://hd03p0waq6gc"]
 
-[ext_resource type="Script" uid="uid://bqh3052b1wj2p" path="res://main.gd" id="1_03owx"]
-[ext_resource type="Script" uid="uid://687j327vpr0k" path="res://character_body_3d.gd" id="1_glv2v"]
+[ext_resource type="Script" path="res://main.gd" id="1_03owx"]
+[ext_resource type="Script" path="res://character_body_3d.gd" id="1_glv2v"]
 [ext_resource type="PackedScene" uid="uid://dqytqxperq1uh" path="res://Assets/Normal version Color and NormalMap/GLB/pew.glb" id="2_r0du0"]
 [ext_resource type="PackedScene" uid="uid://dsfo6dmk81i3b" path="res://Assets/Unreal-Godot/UAL1_Standard.glb" id="3_r0du0"]
-[ext_resource type="AudioStream" uid="uid://ytec527tr7ll" path="res://gunshot.wav" id="4_trn2v"]
 [ext_resource type="Texture2D" uid="uid://btunkd0l0aqgv" path="res://muzzleflash.png" id="5_03owx"]
 [ext_resource type="Texture2D" uid="uid://bnfxv1iw872uc" path="res://Assets/Mapa/Industrial_exterior_v2_Cargo_1.png" id="6_trn2v"]
 [ext_resource type="Texture2D" uid="uid://j2uiauhrjtwo" path="res://Assets/bullet.png" id="7_j4qnp"]
 [ext_resource type="ArrayMesh" uid="uid://b62bgkl2ktc08" path="res://Assets/Mapa/JIJI.res" id="7_lgr22"]
-[ext_resource type="PackedScene" uid="uid://dlljd5rrw80fb" path="res://Bicho.tscn" id="7_trn2v"]
+[ext_resource type="PackedScene" path="res://Bicho.tscn" id="7_trn2v"]
 [ext_resource type="Texture2D" uid="uid://dcr35fayvfdn6" path="res://Assets/battery.png" id="8_fpfj3"]
-[ext_resource type="Script" uid="uid://bsbh4u21n1vtg" path="res://pickup_spawner.gd" id="10_5vvyt"]
-[ext_resource type="PackedScene" uid="uid://pwsvpyoap0wi" path="res://BatteryPickup.tscn" id="11_c6i3y"]
-[ext_resource type="PackedScene" uid="uid://co3qd02aqtlc4" path="res://AmmoPickup.tscn" id="12_c2ibq"]
-[ext_resource type="Script" uid="uid://ji5pvahsacs8" path="res://llegada.gd" id="13_c6i3y"]
+[ext_resource type="Script" path="res://pickup_spawner.gd" id="10_5vvyt"]
+[ext_resource type="PackedScene" path="res://BatteryPickup.tscn" id="11_c6i3y"]
+[ext_resource type="PackedScene" path="res://AmmoPickup.tscn" id="12_c2ibq"]
+[ext_resource type="Script" path="res://llegada.gd" id="13_c6i3y"]
 [ext_resource type="AudioStream" uid="uid://dikgn7iwoosgw" path="res://Assets/Sonidos/Campana-mono.mp3" id="14_c2ibq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rxg2q"]
@@ -319,7 +318,6 @@ transform = Transform3D(1, 0, 0, 0, 0.9583226, 0.28568837, 0, -0.28568837, 0.958
 transform = Transform3D(-1.0183276e-06, 5.239309e-07, 6.9999995, 2.6222458, 6.490287, -1.0430812e-07, -6.490287, 2.6222458, -1.1404447e-06, 0.585, -0.7, -1.084)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Personaje/Camera3D/Arma" unique_id=842113920]
-stream = ExtResource("4_trn2v")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Personaje/Camera3D/Arma" unique_id=1897901989]
 libraries/ = SubResource("AnimationLibrary_03owx")

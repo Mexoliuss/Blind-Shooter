@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d2bqsdlqwm03q"
+uid="uid://c65uscuemopa1"
 path="res://.godot/imported/Industrial_exterior_v2.glb-985eb0e0fab22e81dd9a76c477b30e01.scn"
 
 [deps]
@@ -37,18 +37,6 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={
-"meshes": {
-"Industrial_exterior_v2_Building_10": {
-"generate/lightmap_uv": 0,
-"generate/lods": 0,
-"generate/shadow_meshes": 0,
-"lods/normal_merge_angle": 20.0,
-"save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://Assets/Mapa/JIJI.res",
-"save_to_file/path": "uid://b62bgkl2ktc08"
-}
-}
-}
+_subresources={}
 gltf/naming_version=2
 gltf/embedded_image_handling=1

@@ -95,7 +95,7 @@ func _ready():
 	# sonidos 
 	sonido_caminar = load_mp3("res://Assets/Sonidos/Caminar.mp3")
 	audio_player.set_stream(sonido_caminar)
-	sonido_disparo = load_mp3("res://gunshot.mp3")
+	sonido_disparo = load_mp3("res://Assets/Sonidos/gunshot.mp3")
 	sonido_recarga=load_mp3("res://Assets/Sonidos/Recarga_arma.mp3")
 	audio_arma.set_stream(sonido_disparo)
 

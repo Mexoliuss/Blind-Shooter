@@ -107,9 +107,9 @@ func _ready():
 	play_animation("idle/mixamo_com")  # <-- empieza en idle
 	
 	# sonidos 
-	sonido_lejos = load_mp3("res://Assets/Monsters/SciFi_Monster2.mp3")
-	sonido_cerca = load_mp3("res://Assets/Monsters/Monster_Roar22.mp3")
-	sonido_ataque = load_mp3("res://Assets/Monsters/Monster_Grunt1.mp3")
+	sonido_lejos = load_mp3("res://Assets/Sonidos/SciFi_Monster2.mp3")
+	sonido_cerca = load_mp3("res://Assets/Sonidos/Monster_Roar22.mp3")
+	sonido_ataque = load_mp3("res://Assets/Sonidos/Monster_Grunt1.mp3")
 	timing_audios = rng.randf_range(4, 8)
 	timing_actual = 0
 

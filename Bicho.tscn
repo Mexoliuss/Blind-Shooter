@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dlljd5rrw80fb"]
 
 [ext_resource type="Script" uid="uid://cti6u2t6o6fac" path="res://bicho.gd" id="1_u3e2r"]
-[ext_resource type="AudioStream" uid="uid://76drsnrdr44q" path="res://Assets/Monsters/SciFi_Monster1.mp3" id="2_u3e2r"]
+[ext_resource type="AudioStream" uid="uid://6dn82s1cu8ce" path="res://Assets/Sonidos/SciFi_Monster2.mp3" id="2_u3e2r"]
 [ext_resource type="PackedScene" uid="uid://cy8u4whw4txal" path="res://character_monster.tscn" id="3_ao0d4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fos0i"]
